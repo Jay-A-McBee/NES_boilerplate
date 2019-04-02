@@ -2,15 +2,16 @@ const User = require('../models').User;
 
 module.exports = {
     create: (req, res) => {
-        User.create({
-            name: req.body.name
+        return User.create({
+            first: req.body.first,
+            last: req.body.last,
+            username: req.body.username
         }).then(user => {
-            console.log(user)
-            res.status(201).send(user)
+            return res.status(200).send(user)
         })
         .catch(error => {
-            console.log(error)
-            res.status(400).send(error)
+            console.error(error)
+            return res.status(400).send(error)
         });
     }
 };
